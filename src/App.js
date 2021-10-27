@@ -1,25 +1,67 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import './App.css';
+import axios from 'axios';
+import ReactDOM from 'react-dom'
 
-function App() {
+const { useEffect } = React
+const App = () => {
+    useEffect(() => {
+      axios.get('https://jsonplaceholder.typicode.com/users')
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+    }, [])
+    return (
+      <div>
+       <h1>Hello React</h1>
+      </div>
+    );
+  }
+  ReactDOM.render(<App />, document.getElementById('root'))
+
+
+/*
+const App = () => (
+  <BrowserRouter>
+  <div className="App">
+    <Route exact path="/" component={Home} />
+    <Route path="/about" component={About} />
+    <Route path="/blog/:id" component={Blog} />
+  </div>
+  </BrowserRouter>
+)
+
+const Home = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  <div>
+    <h1>Welcome</h1>
+    <p><a href="/about">Aboutへ</a></p>
+  </div>
+  )
 }
+
+const About = () => {
+  return (
+  <div>
+    <h1>About</h1>
+    <p><a href="/">Homeに戻る</a></p>
+  </div>
+  )
+}
+
+const Blog = props => {
+  const {id} = props.match.params
+
+  return (
+    <div>
+      <p>{id}番目の記事です</p>
+    </div>
+  )
+}
+*/
+
+
+
+
 
 export default App;
